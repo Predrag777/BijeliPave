@@ -23,11 +23,11 @@ public class Move : MonoBehaviour
     {
         HandleMove();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             animator.Play("jump");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+        }*/
     }
 
     void HandleMove()

@@ -5,12 +5,12 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] float damage = 5f;
     [SerializeField] private ParticleSystem attackSystem;
-    float attackDuration = 0.3f;
-    float distance = 5f;
+    float attackDuration = 0.6f;
+    float distance = 0f;
     Rigidbody rb;
     private Animator animator;
 
-    string[] attacks = { "punch2", "punch3" };
+    string[] attacks = { "punch4", "punch5" };
     string[] attacks2 = { "kick1", "kick2" };
 
     int c = 0;
@@ -28,7 +28,7 @@ public class Attack : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            attackSystem.Play();
+            //attackSystem.Play();
             StartCoroutine(performAttack(attacks));
         }
         if (Input.GetMouseButtonDown(1))
