@@ -13,6 +13,8 @@ public class Move : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
