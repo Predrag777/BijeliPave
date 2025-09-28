@@ -18,23 +18,18 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        // prikupljanje inputa sa miša
         rotationX += Input.GetAxis("Mouse X") * sensitivity;
         rotationY -= Input.GetAxis("Mouse Y") * sensitivity;
         rotationY = Mathf.Clamp(rotationY, -20f, 60f);
 
-        // rotacija samog pivot objekta
         transform.rotation = Quaternion.Euler(rotationY, rotationX, 0);
 
-        // pivot prati viteza po poziciji
         transform.position = target.position + Vector3.up * height;
 
-        // kamera je dete pivota, pa će orbitirati automatski
         Transform cam = GetComponentInChildren<Camera>().transform;
         cam.localPosition = new Vector3(0, 0, -distance);
     }
 
-    // yaw vrednost za viteza
     public float GetYaw()
     {
         return rotationX;

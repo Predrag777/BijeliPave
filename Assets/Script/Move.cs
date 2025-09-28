@@ -4,6 +4,7 @@ public class Move : MonoBehaviour
 {
     [SerializeField] float speed = 3f;
     [SerializeField] float sprintSpeed = 7f;
+    [SerializeField] float walkSpeed = 3f;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] private CameraFollow cameraFollow; 
 
@@ -22,7 +23,14 @@ public class Move : MonoBehaviour
     void Update()
     {
         HandleMove();
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = sprintSpeed;
+        }
+        else
+        {
+            speed = walkSpeed;
+        }
         /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             animator.Play("jump");
