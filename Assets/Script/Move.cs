@@ -23,14 +23,14 @@ public class Move : MonoBehaviour
     void Update()
     {
         HandleMove();
-        if (Input.GetKey(KeyCode.LeftShift))
+        /*if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = sprintSpeed;
         }
         else
         {
             speed = walkSpeed;
-        }
+        }*/
         /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             animator.Play("jump");
@@ -50,8 +50,7 @@ public class Move : MonoBehaviour
         {
             animator.SetFloat("speed", speed);
 
-            Quaternion toRotation = Quaternion.LookRotation(move, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(move, Vector3.up);
 
             rb.MovePosition(transform.position + move.normalized * Time.fixedDeltaTime * speed);
         }

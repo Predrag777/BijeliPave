@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     Rigidbody rb;
     private Animator animator;
 
-    string[] attacks = { "punch4", "punch5" };
+    string[] attacks = { "punch1", "punch2" };
     string[] attacks2 = { "kick1", "kick2" };
 
     int c = 0;
@@ -40,7 +40,7 @@ public class Attack : MonoBehaviour
 
     private IEnumerator performAttack(string [] attacks)
     {
-        animator.speed = 2f;
+        //animator.speed = 2f;
 
         animator.Play(attacks[c]);
 
