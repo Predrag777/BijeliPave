@@ -7,7 +7,7 @@ public class MoveController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    [SerializeField] private CameraFollow cameraFollow; 
+    [SerializeField] private CameraController cameraFollow; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,23 +29,26 @@ public class MoveController : MonoBehaviour
 
     private void Movement()
     {
-        float vMove = Input.GetAxis("Vertical");
-        float hMove = Input.GetAxis("Horizontal");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(hMove, 0f, vMove) * speed * Time.fixedDeltaTime;
+        Quaternion camRotation = Quaternion.Euler(0, cameraFollow.GetYaw(), 0);
+        Vector3 move = camRotation * new Vector3(horizontal, 0f, vertical);
+
         if (move != Vector3.zero)
         {
-            rb.rotation = Quaternion.LookRotation(move);
-            
             animator.SetFloat("speed", speed);
 
-            rb.MovePosition(transform.position + move);
+            transform.rotation = Quaternion.LookRotation(move, Vector3.up);
+
+            rb.MovePosition(transform.position + move.normalized * Time.fixedDeltaTime * speed);
         }
         else
         {
-            animator.SetFloat("speed", 0);
+            animator.SetFloat("speed", 0f);
         }
     }
+
 
     private void Rotation()
     {
