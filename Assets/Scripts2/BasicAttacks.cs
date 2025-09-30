@@ -6,6 +6,12 @@ public class BasicAttacks : MonoBehaviour
     private float damage = 5f;
     private float speed = 1f;
     private Animator animator;
+
+    private string[] attacks = { "punch", "punch2" };
+
+    private string[] kickAttacks = { "kick1", "kick2" };
+    int c = 0;
+    int c2 = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,11 +26,15 @@ public class BasicAttacks : MonoBehaviour
         {
             StartCoroutine(PlayAttacks());
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            StartCoroutine(PlayKicks());
+        }
     }
 
     private IEnumerator PlayAttacks()
     {
-        animator.Play("punch");
+        animator.Play(attacks[c]);
         powerUp.Play();
         for (int i = 0; i < 3; i++)
         {
@@ -32,6 +42,20 @@ public class BasicAttacks : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
 
         }
+        c++;
+        if (c >= attacks.Length)
+            c = 0;
+        yield return new WaitForSeconds(speed);
+    }
+
+    private IEnumerator PlayKicks()
+    {
+        animator.Play(kickAttacks[c]);
+
+        c++;
+        if (c >= kickAttacks.Length)
+            c = 0;
+        
         yield return new WaitForSeconds(speed);
     }
 }
