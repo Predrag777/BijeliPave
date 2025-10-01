@@ -5,9 +5,11 @@ public class Knight : MonoBehaviour
     public float speed = 5f;
     GameObject rightArm;
 
+    public bool isSword = false;
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
+        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -22,11 +24,8 @@ public class Knight : MonoBehaviour
             sword.transform.localRotation = Quaternion.identity;
 
             Rigidbody rb = sword.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true; 
-                rb.detectCollisions = false;
-            }
+
+            isSword = true;
         }
     }
 }

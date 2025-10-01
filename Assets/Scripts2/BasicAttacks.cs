@@ -6,7 +6,7 @@ public class BasicAttacks : MonoBehaviour
     private float damage = 5f;
     private float speed = 1f;
     private Animator animator;
-
+    private Knight knight;
     private string[] attacks = { "punch", "punch2" };
 
     private string[] kickAttacks = { "kick1", "kick2" };
@@ -17,11 +17,13 @@ public class BasicAttacks : MonoBehaviour
     {
         powerUp.Stop();
         animator = GetComponent<Animator>();
+        knight = GetComponent<Knight>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (knight.isSword) return;
         if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(PlayAttacks());
@@ -35,13 +37,13 @@ public class BasicAttacks : MonoBehaviour
     private IEnumerator PlayAttacks()
     {
         animator.Play(attacks[c]);
-        powerUp.Play();
+        /*powerUp.Play();
         for (int i = 0; i < 3; i++)
         {
             transform.position += transform.forward * 30f * Time.fixedDeltaTime;
             yield return new WaitForSeconds(0.1f);
 
-        }
+        }*/
         c++;
         if (c >= attacks.Length)
             c = 0;
