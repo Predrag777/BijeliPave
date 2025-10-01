@@ -4,6 +4,7 @@ public class Turk : MonoBehaviour
 {
     Animator animator;
     bool isHit = false;
+    bool isDie = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +14,12 @@ public class Turk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(GetHited());
+        if (!isDie)
+            StartCoroutine(GetHited());
+        else
+        {
+            StartCoroutine(Die());
+        }
     }
 
     private IEnumerator GetHited()
@@ -27,12 +33,25 @@ public class Turk : MonoBehaviour
         yield return new WaitForSeconds(0f);
     }
 
+    private IEnumerator Die()
+    {
+        animator.Play("death");
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
+    }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("hand") && !isHit)
+
+    void OnTriggerEnter(Collider other)
+    {
+        if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
             Debug.Log("HIT");
             isHit = true;
+        }
+
+        if (other.gameObject.CompareTag("sword"))
+        {
+            isDie = true;
         }
         
     }
