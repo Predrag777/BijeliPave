@@ -39,7 +39,7 @@ public class BasicAttacks : MonoBehaviour
         }
 
 
-        animator.SetBool("fight", isAttacking);
+        //animator.SetBool("fight", isAttacking);
     }
 
     private IEnumerator PlayAttacks()

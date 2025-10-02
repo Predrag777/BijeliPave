@@ -17,12 +17,16 @@ public class Bandit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0f)
+            isDie = true;
         if (!isDie)
-            StartCoroutine(GetHited());
-        else
-        {
-            StartCoroutine(Die());
-        }
+                StartCoroutine(GetHited());
+            else
+            {
+                StartCoroutine(Die());
+            }
+
+
     }
 
     private IEnumerator GetHited()
@@ -38,8 +42,9 @@ public class Bandit : MonoBehaviour
 
     private IEnumerator Die()
     {
+        health = 0f;
         animator.Play("death");
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 
@@ -51,6 +56,7 @@ public class Bandit : MonoBehaviour
             Debug.Log("HIT");
             isHit = true;
             isAttacking = true;
+            health -= 1f;
         }
 
         if (other.gameObject.CompareTag("sword"))

@@ -36,7 +36,7 @@ public class Turk : MonoBehaviour
     private IEnumerator Die()
     {
         animator.Play("death");
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 
