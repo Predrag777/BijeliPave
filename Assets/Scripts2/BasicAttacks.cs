@@ -7,9 +7,14 @@ public class BasicAttacks : MonoBehaviour
     private float speed = 1f;
     private Animator animator;
     private Knight knight;
+
+    public bool isAttacking = false;
     private string[] attacks = { "punch", "punch2" };
 
     private string[] kickAttacks = { "kick1", "kick2" };
+
+
+    public GameObject target; 
     int c = 0;
     int c2 = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +37,9 @@ public class BasicAttacks : MonoBehaviour
         {
             StartCoroutine(PlayKicks());
         }
+
+
+        animator.SetBool("fight", isAttacking);
     }
 
     private IEnumerator PlayAttacks()
@@ -47,6 +55,8 @@ public class BasicAttacks : MonoBehaviour
         c++;
         if (c >= attacks.Length)
             c = 0;
+        isAttacking = true;
+        findNearestTarget();
         yield return new WaitForSeconds(speed);
     }
 
@@ -57,7 +67,29 @@ public class BasicAttacks : MonoBehaviour
         c++;
         if (c >= kickAttacks.Length)
             c = 0;
-        
+        isAttacking = true;
         yield return new WaitForSeconds(speed);
+    }
+
+    public void findNearestTarget()
+    {
+        GameObject [] all = GameObject.FindGameObjectsWithTag("enemy");
+        float minDist = 99999f;
+        for (int i = 0; i < all.Length; i++)
+        {
+            float currDist = Vector3.Distance(transform.position, all[i].transform.position);
+            if (currDist < minDist)
+            {
+                target = all[i];
+                minDist = currDist;
+            }
+        }
+    }
+
+
+    private IEnumerator refreshAttack()
+    {
+        yield return new WaitForSeconds(5f);
+        isAttacking = false;
     }
 }

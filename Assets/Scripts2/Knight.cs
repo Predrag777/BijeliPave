@@ -4,12 +4,12 @@ public class Knight : MonoBehaviour
 {
     public float speed = 5f;
     GameObject rightArm;
-
+    
+    
     public bool isSword = false;
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
-
     }
 
     void OnCollisionEnter(Collision collision)
@@ -44,5 +44,6 @@ public class Knight : MonoBehaviour
 
             isSword = true;
         }
+        
     }
 }

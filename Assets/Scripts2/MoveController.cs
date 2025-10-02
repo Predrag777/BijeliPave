@@ -8,10 +8,13 @@ public class MoveController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     [SerializeField] private CameraController cameraFollow; 
+    BasicAttacks bAttacks;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        bAttacks = GetComponent<BasicAttacks>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
@@ -39,8 +42,10 @@ public class MoveController : MonoBehaviour
         {
             animator.SetFloat("speed", speed);
 
-            transform.rotation = Quaternion.LookRotation(move, Vector3.up);
-
+            //if (!bAttacks.isAttacking)
+                transform.rotation = Quaternion.LookRotation(move, Vector3.up);
+            /*else if(bAttacks.target!=null)
+                transform.LookAt(bAttacks.target.transform);*/
             rb.MovePosition(transform.position + move.normalized * Time.fixedDeltaTime * speed);
         }
         else
