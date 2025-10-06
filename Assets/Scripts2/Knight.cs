@@ -1,15 +1,25 @@
 using UnityEngine;
-
+using System.Collections;
 public class Knight : MonoBehaviour
 {
     public float speed = 5f;
     GameObject rightArm;
-    
-    
+
+    public float health = 5f;
     public bool isSword = false;
+    bool isHit;
+    Animator animator;
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
+    }
+
+    void Update()
+    {
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -29,6 +39,18 @@ public class Knight : MonoBehaviour
         }
     }
 
+    private IEnumerator GetHited()
+    {
+        if (isHit)
+        {
+            health = -1f;
+            animator.Play("hited");
+            isHit = false;
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(0f);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("sword"))
@@ -43,6 +65,12 @@ public class Knight : MonoBehaviour
             Rigidbody rb = sword.GetComponent<Rigidbody>();
 
             isSword = true;
+        }
+        if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
+        {
+            
+            Debug.Log("I am hitted");
+            isHit = true;
         }
         
     }
