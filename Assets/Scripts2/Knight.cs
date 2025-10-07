@@ -9,17 +9,21 @@ public class Knight : MonoBehaviour
     public bool isSword = false;
     bool isHit;
     Animator animator;
+
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
+        if (health>0)
+            StartCoroutine(GetHited());
     }
 
     void OnCollisionEnter(Collision collision)
@@ -39,7 +43,7 @@ public class Knight : MonoBehaviour
         }
     }
 
-    private IEnumerator GetHited()
+    /*private IEnumerator GetHited()
     {
         if (isHit)
         {
@@ -49,7 +53,7 @@ public class Knight : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(0f);
-    }
+    }*/
 
     void OnTriggerEnter(Collider other)
     {
@@ -68,10 +72,21 @@ public class Knight : MonoBehaviour
         }
         if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
-            
+
             Debug.Log("I am hitted");
             isHit = true;
         }
-        
+
+    }
+    
+    private IEnumerator GetHited()
+    {
+        if (isHit)
+        {
+            animator.Play("hited");
+            isHit = false;
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(0f);
     }
 }
