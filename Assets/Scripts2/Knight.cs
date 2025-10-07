@@ -76,7 +76,6 @@ public class Knight : MonoBehaviour
             Debug.Log("I am hitted");
             isHit = true;
         }
-
     }
     
     private IEnumerator GetHited()
