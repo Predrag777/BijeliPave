@@ -8,10 +8,14 @@ public class Bandit : MonoBehaviour
     bool isDie = false;
 
     public bool isAttacking = false;
+
+    AudioSource aSource;
+    [SerializeField] AudioClip getPunched;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
+        aSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,6 +58,8 @@ public class Bandit : MonoBehaviour
         if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
             Debug.Log("HIT");
+            aSource.clip = getPunched;
+            aSource.Play();
             isHit = true;
             isAttacking = true;
             health -= 1f;

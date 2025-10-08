@@ -8,6 +8,7 @@ TagManager:
   - hand
   - leg
   - knight
+  - enemy
   layers:
   - Default
   - TransparentFX

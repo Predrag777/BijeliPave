@@ -9,20 +9,26 @@ public class Knight : MonoBehaviour
     public bool isSword = false;
     bool isHit;
     Animator animator;
+    GameObject respawnPos;
 
+
+    AudioSource aSource;
+    [SerializeField] AudioClip getPunched;
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
         animator = GetComponent<Animator>();
+        respawnPos = GameObject.Find("RespawnPos");
+        aSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(PlayerDeathSequence());
         }
-        if (health>0)
+        if (health > 0)
             StartCoroutine(GetHited());
     }
 
@@ -75,17 +81,29 @@ public class Knight : MonoBehaviour
 
             Debug.Log("I am hitted");
             isHit = true;
+            health -= 3f;
         }
     }
-    
+
     private IEnumerator GetHited()
     {
         if (isHit)
         {
+            aSource.clip = getPunched;
+            aSource.Play();
             animator.Play("hited");
             isHit = false;
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(0f);
+    }
+
+    private IEnumerator PlayerDeathSequence()
+    {
+        animator.Play("death");
+        yield return new WaitForSeconds(2f);
+        health = 5f;
+        Debug.Log("RESPAWN");
+        transform.position = respawnPos.transform.position;
     }
 }
