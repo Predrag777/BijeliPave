@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+
 public class BanditAttack : MonoBehaviour
 {
     Bandit bandit;
@@ -16,16 +17,18 @@ public class BanditAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         bandit = GetComponent<Bandit>();
 
-        wp = GetComponent<WeakPoint>();
+        wp = GetComponentInChildren<WeakPoint>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("knight");
         }
+        
         if (wp.health > 0f && wp.isAttacking)
         {
             MoveAttack(target);
