@@ -76,13 +76,13 @@ public class Knight : MonoBehaviour
 
             isSword = true;
         }
-        if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
+        /*if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
 
             Debug.Log("I am hitted");
             isHit = true;
             health -= 3f;
-        }
+        }*/
     }
 
     private IEnumerator GetHited()

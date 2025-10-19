@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BasicAttacks : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem powerUp;
+    //[SerializeField] private ParticleSystem powerUp;
     private float damage = 5f;
     private float speed = 1f;
     private Animator animator;
@@ -19,7 +19,7 @@ public class BasicAttacks : MonoBehaviour
 
     void Start()
     {
-        powerUp.Stop();
+        //powerUp.Stop();
         animator = GetComponent<Animator>();
         knight = GetComponent<Knight>();
     }
@@ -40,7 +40,7 @@ public class BasicAttacks : MonoBehaviour
     {
         isAttacking = true;
         animator.Play(attacks[c]);
-        powerUp.Play();
+        //powerUp.Play();
 
         c = (c + 1) % attacks.Length;
         findNearestTarget();

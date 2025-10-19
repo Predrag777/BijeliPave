@@ -7,13 +7,16 @@ public class BanditAttack : MonoBehaviour
     Animator anim;
 
     Rigidbody rb;
-    bool logAttack=false;
+    bool logAttack = false;
+    private WeakPoint wp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         bandit = GetComponent<Bandit>();
+
+        wp = GetComponent<WeakPoint>();
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class BanditAttack : MonoBehaviour
         {
             target = GameObject.FindGameObjectWithTag("knight");
         }
-        if (bandit.health > 0f && bandit.isAttacking)
+        if (wp.health > 0f && wp.isAttacking)
         {
             MoveAttack(target);
             PerformAttack(target);
