@@ -68,7 +68,9 @@ public class WeakPoint : MonoBehaviour
 
         if (other.gameObject.CompareTag("sword"))
         {
-            isDie = true;
+            Sword sw = other.gameObject.GetComponent<Sword>();
+            if(!sw.isFree)
+                isDie = true;
         }
 
     }

@@ -75,6 +75,7 @@ public class Knight : MonoBehaviour
             Rigidbody rb = sword.GetComponent<Rigidbody>();
 
             isSword = true;
+            sword.GetComponent<Sword>().isFree = false;
         }
         /*if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
