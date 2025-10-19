@@ -7,6 +7,7 @@ public class WeakPoint : MonoBehaviour
     Animator animator;
     bool isHit = false;
     bool isDie = false;
+    Knight knight;
 
     public bool isAttacking = false;
 
@@ -15,13 +16,16 @@ public class WeakPoint : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        knight = GetComponentInParent<Knight>();
         animator = GetComponentInParent<Animator>();
         aSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (health <= 0f)
             isDie = true;
         if (!isDie)
@@ -56,7 +60,7 @@ public class WeakPoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
+        if (!knight.isBlock && (other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
             
             aSource.clip = getPunched;

@@ -17,6 +17,8 @@ public class BasicAttacks : MonoBehaviour
     int c = 0;
     int c2 = 0;
 
+
+
     void Start()
     {
         //powerUp.Stop();
@@ -29,10 +31,10 @@ public class BasicAttacks : MonoBehaviour
         if (knight.health <= 0f) return;
         if (knight.isSword) return;
         if (isAttacking) return;
-
-        if (Input.GetMouseButtonDown(0))
+    
+        if (!knight.isBlock && Input.GetMouseButtonDown(0))
             StartCoroutine(PlayAttacks());
-        if (Input.GetMouseButtonDown(1))
+        if (!knight.isBlock && Input.GetMouseButtonDown(1))
             StartCoroutine(PlayKicks());
     }
 

@@ -10,6 +10,7 @@ public class Knight : MonoBehaviour
     bool isHit;
     Animator animator;
     GameObject respawnPos;
+    public bool isBlock = false;
 
 
     AudioSource aSource;
@@ -30,6 +31,21 @@ public class Knight : MonoBehaviour
         }
         if (health > 0)
             StartCoroutine(GetHited());
+
+        if (health > 0)
+        {
+            if (Input.GetKey(KeyCode.G))
+            {
+                animator.SetBool("block", true);
+                isBlock = true;
+            }
+            else
+            {
+                isBlock = false;
+                animator.SetBool("block", false);
+
+            }
+        }
     }
 
     void OnCollisionEnter(Collision collision)
