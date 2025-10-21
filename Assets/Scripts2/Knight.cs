@@ -13,14 +13,25 @@ public class Knight : MonoBehaviour
     public bool isBlock = false;
 
 
+    GameObject sword;
+
+    [SerializeField] GameObject leftHand;
+    [SerializeField]  GameObject rightHand;
+    [SerializeField]  GameObject weakPoint;
+
     AudioSource aSource;
     [SerializeField] AudioClip getPunched;
     void Start()
     {
         rightArm = GameObject.Find("rightHand");
+
         animator = GetComponent<Animator>();
         respawnPos = GameObject.Find("RespawnPos");
         aSource = GetComponent<AudioSource>();
+
+        /*leftHand = GameObject.Find("leftHand");
+        rightHand = GameObject.Find("rightHand");
+        weakPoint = GameObject.Find("mixamorig:Spine2");*/
     }
 
     void Update()
@@ -38,13 +49,30 @@ public class Knight : MonoBehaviour
             {
                 animator.SetBool("block", true);
                 isBlock = true;
+
+                leftHand.GetComponent<BoxCollider>().enabled = false;
+                rightHand.GetComponent<BoxCollider>().enabled = false;
+                weakPoint.GetComponent<BoxCollider>().enabled = false;
             }
             else
             {
                 isBlock = false;
                 animator.SetBool("block", false);
 
+                leftHand.GetComponent<BoxCollider>().enabled = true;
+                rightHand.GetComponent<BoxCollider>().enabled = true;
+                weakPoint.GetComponent<BoxCollider>().enabled = true;
+
             }
+        }
+
+        if (isBlock)
+        {
+
+        }
+        if (isSword)
+        {
+            
         }
     }
 
@@ -89,9 +117,8 @@ public class Knight : MonoBehaviour
             sword.transform.localRotation = Quaternion.identity;
 
             Rigidbody rb = sword.GetComponent<Rigidbody>();
-
-            isSword = true;
             sword.GetComponent<Sword>().isFree = false;
+            isSword = true;
         }
         /*if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
@@ -101,6 +128,7 @@ public class Knight : MonoBehaviour
             health -= 3f;
         }*/
     }
+
 
     private IEnumerator GetHited()
     {

@@ -60,9 +60,10 @@ public class WeakPoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!knight.isBlock && (other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
+
+        if ((other.gameObject.CompareTag("hand") || other.gameObject.CompareTag("leg")) && !isHit)
         {
-            
+            if (knight != null && knight.isBlock) return;
             aSource.clip = getPunched;
             aSource.Play();
             isHit = true;

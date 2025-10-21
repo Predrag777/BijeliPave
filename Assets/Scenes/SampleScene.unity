@@ -1040,6 +1040,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: hand
       objectReference: {fileID: 0}
+    - target: {fileID: -3542885339558904099, guid: 5d5338ed8fbcc697a9b9651447147534, type: 3}
+      propertyPath: m_Name
+      value: mixamorig:Spine2
+      objectReference: {fileID: 0}
     - target: {fileID: -2084811680363313996, guid: 5d5338ed8fbcc697a9b9651447147534, type: 3}
       propertyPath: m_TagString
       value: leg
@@ -1203,7 +1207,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 0.5, z: 0.5}
+  m_Size: {x: 1.8, y: 0.5, z: 0.7}
   m_Center: {x: -0.7, y: 0, z: 0}
 --- !u!114 &913851161
 MonoBehaviour:
@@ -6152,6 +6156,10 @@ MonoBehaviour:
   speed: 5
   health: 5
   isSword: 0
+  isBlock: 0
+  leftHand: {fileID: 1174884446}
+  rightHand: {fileID: 1823946984}
+  weakPoint: {fileID: 2017184037}
   getPunched: {fileID: 8300000, guid: de119d3f4ceffa0738c15e48f1872439, type: 3}
 --- !u!114 &1069132674
 MonoBehaviour:
@@ -7180,10 +7188,10 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 758432087}
-  - {fileID: 1588924101}
   - {fileID: 199162453}
   - {fileID: 466826539}
   - {fileID: 786940253}
   - {fileID: 1673809784}
   - {fileID: 732260481}
   - {fileID: 81063457}
+  - {fileID: 1588924101}
